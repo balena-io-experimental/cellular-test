@@ -62,6 +62,8 @@ function mount_dev()
 
 function init_systemd()
 {
+	systemctl disable udevd.service
+	systemctl mask udevd.service
 	GREEN='\033[0;32m'
 	echo -e "${GREEN}Systemd init system enabled."
 	for var in $(compgen -e); do
@@ -78,9 +80,6 @@ function init_systemd()
 		WorkingDirectory=$(pwd)
 	EOF
 
-	systemctl disable udevd.service
-	systemctl mask udevd.service
-	
 	exec env DBUS_SYSTEM_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket /sbin/init quiet systemd.show_status=0
 }
 

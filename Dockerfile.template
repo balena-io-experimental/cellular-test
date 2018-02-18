@@ -7,7 +7,7 @@ COPY entry.sh /usr/bin/entry.sh
 RUN chmod +x /usr/bin/entry.sh
 
 #switch on systemd init system in container
-ENV INITSYSTEM on
+ENV INITSYSTEM off
 
 WORKDIR /usr/src/app
 
