@@ -13,6 +13,7 @@ WORKDIR /usr/src/app
 
 COPY src/mmcli /usr/bin/mmcli
 COPY src/mmcli_libs /usr/lib
+COPY src/start.sh start.sh
 
 RUN chmod +x /usr/bin/mmcli
 
