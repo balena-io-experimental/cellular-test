@@ -11,7 +11,7 @@ do
 	mmcli -L | grep -q Modem
 	if [ $? -eq 0 ]; then
 		MODEM_NUMBER=`mmcli -L | grep Modem | sed -e 's/\//\ /g' | awk '{print $5}'` 
-		echo `mmcli -m ${MODEM_NUMBER} --command="AT+CSQ?"`
+		echo `mmcli -m ${MODEM_NUMBER} --command="AT+CSQ"`
 	fi
 	sleep 300;
 done

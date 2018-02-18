@@ -2,6 +2,9 @@
 
 set -m
 
+systemctl disable udevd.service
+systemctl mask udevd.service
+
 function start_udev()
 {
 	which udevd
@@ -62,8 +65,6 @@ function mount_dev()
 
 function init_systemd()
 {
-	systemctl disable udevd.service
-	systemctl mask udevd.service
 	GREEN='\033[0;32m'
 	echo -e "${GREEN}Systemd init system enabled."
 	for var in $(compgen -e); do
