@@ -1,0 +1,20 @@
+FROM resin/%%RESIN_MACHINE_NAME%%-debian:jessie
+
+MAINTAINER Shaun Mulligan <shaun@resin.io>
+
+# Override the default entry.sh
+COPY entry.sh /usr/bin/entry.sh 
+RUN chmod +x /usr/bin/entry.sh
+
+#switch on systemd init system in container
+ENV INITSYSTEM on
+
+WORKDIR /usr/src/app
+
+COPY src/mmcli /usr/bin/mmcli
+COPY src/mmcli_libs /usr/lib
+
+RUN chmod +x /usr/bin/mmcli
+
+ENV DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+CMD ["bash", "/usr/src/app/start.sh"]
