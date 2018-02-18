@@ -2,8 +2,9 @@
 
 set -m
 
-systemctl disable udevd.service
+systemctl mask systemd-udevd.service
 systemctl mask udevd.service
+
 
 function start_udev()
 {
