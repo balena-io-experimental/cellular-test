@@ -2,20 +2,21 @@ FROM resin/%%RESIN_MACHINE_NAME%%-debian:jessie
 
 MAINTAINER Shaun Mulligan <shaun@resin.io>
 
-# Override the default entry.sh
-COPY entry.sh /usr/bin/entry.sh 
-RUN chmod +x /usr/bin/entry.sh
+RUN apt-get update && apt-get install -yq \
+    python && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 #switch on systemd init system in container
-ENV INITSYSTEM off
+ENV UDEV=off
 
 WORKDIR /usr/src/app
 
 COPY src/mmcli /usr/bin/mmcli
 COPY src/mmcli_libs /usr/lib
 COPY src/start.sh start.sh
-
+COPY src/speedtest.py speedtest.py
 RUN chmod +x /usr/bin/mmcli
 
 ENV DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+
 CMD ["bash", "/usr/src/app/start.sh"]
