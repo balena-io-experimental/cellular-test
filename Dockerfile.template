@@ -14,7 +14,7 @@ WORKDIR /usr/src/app
 COPY src/mmcli /usr/bin/mmcli
 COPY src/mmcli_libs /usr/lib
 COPY src/start.sh start.sh
-
+COPY src/speedtest.py speedtest.py
 RUN chmod +x /usr/bin/mmcli
 
 ENV DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
